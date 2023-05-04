@@ -17,26 +17,46 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black"/>
                 <GradientStop Color="#FF2880AD" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Content="Start" x:Name="Start" FontSize="25px" Margin="1,368,0,22" Height="44" Width="94" HorizontalAlignment="Left" Background="#FF3133CC"/>
-        <StackPanel HorizontalAlignment="Left" Orientation="Vertical" VerticalAlignment="Top" Margin="714,366,0,0" Background="#FF234B79">
+        <Button Content="Start" x:Name="Start" FontSize="25px" Margin="1,368,0,22" Height="44" Width="94" HorizontalAlignment="Left" Background="#FF3133CC" Grid.RowSpan="2" Click="Start_Click"/>
+        <StackPanel HorizontalAlignment="Left" Orientation="Vertical" VerticalAlignment="Top" Margin="714,366,0,0" Background="#FF234B79" Grid.RowSpan="2">
             <TextBlock TextWrapping="Wrap" Text="Ich unikaj" FontSize="18"/>
             <ContentControl Template="{DynamicResource EnemyTemplate}" Content="ContentControl"/>
-            <Ellipse Stroke="Black" Fill="#FFFF0303" Height="100" Width="100"/>
+            <Ellipse Stroke="Black" Fill="#FFFF0303" Height="50" Width="50"/>
         </StackPanel>
-        <ProgressBar Height="20" Width="600px" Margin="0,380,0,34" Background="#FF252677"/>
+        <ProgressBar Height="20" Width="600px" Margin="100,380,100,6" Background="#FF252677"/>
 
-        <StackPanel x:Name="human" Orientation="Vertical">
+        <StackPanel x:Name="human" Orientation="Vertical" Grid.RowSpan="2">
             <Ellipse Fill="White" Height="15" Width="10"/>
             <Rectangle Fill="White" Height="30" Width="10"/>
         </StackPanel>
-        <Canvas>
-            <TextBlock x:Name="gameOverText" Canvas.Left="332" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="217" FontFamily="" FontSize="50"/>
+        <Canvas x:Name="playArea" Grid.RowSpan="2">
+            <Rectangle Height="46" Canvas.Left="566" Stroke="Black" Canvas.Top="98" Width="50">
+                <Rectangle.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.LayoutTransform>
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF30F7EA" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <TextBlock x:Name="gameOverText" Canvas.Left="284" TextWrapping="Wrap" Text="KONIEC GRY" Canvas.Top="174" FontSize="30"/>
         </Canvas>
     </Grid>
 </Window>
