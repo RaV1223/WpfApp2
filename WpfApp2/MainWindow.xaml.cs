@@ -15,14 +15,38 @@ using System.Windows.Shapes;
 
 namespace WpfApp2
 {
+   
+
+    private void startButton_Click(object sender, RoutedEventArgs e)
+    {
+        AddEnemy();
+    }
+ private void AddEnemy()
+    {
+        ContentControl enemy = new ContentControl();
+    }
+   
+
     /// <summary>
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
+    /// 
+    public sealed partial class MainPage : MainWindow.Common.LayoutAwarePage
+    {
+        Random random = new Random();
+    }
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public class Common
+        {
+            public class LayoutAwarePage
+            {
+            }
         }
     }
 }
