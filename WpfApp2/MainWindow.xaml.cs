@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using System.Security.Cryptography;
 
 namespace Save_the_Humans
 {
