@@ -29,7 +29,7 @@ namespace Save_the_Humans
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();  
 
             enemyTimer.Tick += EnemyTimer_Tick;
             enemyTimer.Interval = TimeSpan.FromSeconds(2);
