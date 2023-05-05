@@ -1,62 +1,86 @@
-﻿<Window x:Class="WpfApp2.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp2"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<Window x:Class="Save_the_Humans.MainWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:Save_the_Humans"
+            mc:Ignorable="d"
+            Title="Save the Humans" Height="700" Width="1000">
     <Window.Resources>
         <ControlTemplate x:Key="EnemyTemplate" TargetType="{x:Type ContentControl}">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="17*"/>
-                    <ColumnDefinition Width="8*"/>
-                </Grid.ColumnDefinitions>
+                <Ellipse Fill="Gray" Height="100" Stroke="Black" Width="75"/>
+                <Ellipse Fill="Black" HorizontalAlignment="Center" Height="35" Margin="40,20,70,0" Stroke="Black" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.5,0.5">
+
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="10"/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="Black" HorizontalAlignment="Center" Height="35" Margin="70,20,40,0" Stroke="Black" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.5,0.5">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-10"/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
             </Grid>
         </ControlTemplate>
     </Window.Resources>
-    <Grid HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800">
+    <Grid x:Name="grid" Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="160"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="29*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF2880AD" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button Content="Start" x:Name="Start" FontSize="25px" Margin="1,368,0,22" Height="44" Width="94" HorizontalAlignment="Left" Background="#FF3133CC" Grid.RowSpan="2" Click="Start_Click"/>
-        <StackPanel HorizontalAlignment="Left" Orientation="Vertical" VerticalAlignment="Top" Margin="714,366,0,0" Background="#FF234B79" Grid.RowSpan="2">
-            <TextBlock TextWrapping="Wrap" Text="Ich unikaj" FontSize="18"/>
-            <ContentControl Template="{DynamicResource EnemyTemplate}" Content="ContentControl"/>
-            <Ellipse Stroke="Black" Fill="#FFFF0303" Height="50" Width="50"/>
-        </StackPanel>
-        <ProgressBar Height="20" Width="600px" Margin="100,380,100,6" Background="#FF252677"/>
 
-        <StackPanel x:Name="human" Orientation="Vertical" Grid.RowSpan="2">
-            <Ellipse Fill="White" Height="15" Width="10"/>
-            <Rectangle Fill="White" Height="30" Width="10"/>
-        </StackPanel>
-        <Canvas x:Name="playArea" Grid.RowSpan="2">
-            <Rectangle Height="46" Canvas.Left="566" Stroke="Black" Canvas.Top="98" Width="50">
-                <Rectangle.LayoutTransform>
+        <Button x:Name="startButton" 
+                Content="Start!" 
+                HorizontalAlignment="Center" 
+                Grid.Row="1" 
+                VerticalAlignment="Center" Click="StartButton_Click" Height="49" Width="81" Background="Red"/>
+        <ProgressBar x:Name="progressBar"  Grid.Column="1" Grid.Row="1" Height="20"/>
+        <Canvas x:Name="playArea" Height="Auto" Margin="0" Width="Auto" Grid.ColumnSpan="3" MouseLeave="playArea_MouseLeave" MouseMove="playArea_MouseMove">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF31B6FB" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <StackPanel x:Name="human" Orientation="Vertical" MouseDown="Human_MouseDown">
+                <Ellipse Fill="White" Height="10" Width="12"/>
+                <Rectangle Fill="White" Height="20" Width="12"/>
+            </StackPanel>
+            <TextBlock x:Name="gameOverText" Canvas.Left="289" TextWrapping="Wrap" Text="Koniec Gry" Canvas.Top="297" FontFamily="Arial" FontSize="72" FontWeight="Bold" FontStyle="Italic" Width="426"/>
+            <Rectangle x:Name="target" Height="50" Canvas.Left="40" Canvas.Top="50" Width="50" RenderTransformOrigin="0.5,0.5" MouseEnter="Target_MouseEnter" Fill="#FFB11818">
+                <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
                         <RotateTransform Angle="45"/>
                         <TranslateTransform/>
                     </TransformGroup>
-                </Rectangle.LayoutTransform>
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF30F7EA" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
+                </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="gameOverText" Canvas.Left="284" TextWrapping="Wrap" Text="KONIEC GRY" Canvas.Top="174" FontSize="30"/>
         </Canvas>
+        <StackPanel Grid.Column="2" Orientation="Vertical" Grid.Row="1">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Ich unikaj" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+            <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource EnemyTemplate}">
+                <Ellipse Fill="Gray" Height="100" Stroke="Black" Width="100"/>
+            </ContentControl>
+
+        </StackPanel>
+
     </Grid>
 </Window>
