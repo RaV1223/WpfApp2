@@ -38,14 +38,12 @@ namespace Save_the_Humans
             targetTimer.Tick += TargetTimer_Tick;
             targetTimer.Interval = TimeSpan.FromSeconds(.1);
         }
-
         private void TargetTimer_Tick(object sender, EventArgs e)
         {
             progressBar.Value += 1;
             if (progressBar.Value >= progressBar.Maximum)
                 EndTheGame();
         }
-
         private void EndTheGame()
         {
             if (!playArea.Children.Contains(gameOverText))
@@ -58,17 +56,14 @@ namespace Save_the_Humans
 
             }
         }
-
         private void EnemyTimer_Tick(object sender, EventArgs e)
         {
             AddEnemy();
         }
-
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             StartGame();
         }
-
         private void StartGame()
         {
             human.IsHitTestVisible = true;
@@ -81,7 +76,6 @@ namespace Save_the_Humans
             enemyTimer.Start();
             targetTimer.Start();
         }
-
         private void AddEnemy()
         {
             ContentControl enemy = new ContentControl();
@@ -93,13 +87,11 @@ namespace Save_the_Humans
 
             enemy.MouseEnter += Enemy_MouseEnter;
         }
-
         private void Enemy_MouseEnter(object sender, MouseEventArgs e)
         {
             if (humanCaptured)
                 EndTheGame();
         }
-
         private void AnimateEnemy(ContentControl enemy, double from, double to, string propertToAnimate)
         {
             Storyboard storyboard = new Storyboard() { AutoReverse = true, RepeatBehavior = RepeatBehavior.Forever };
@@ -114,7 +106,6 @@ namespace Save_the_Humans
             storyboard.Children.Add(animation);
             storyboard.Begin();
         }
-
         private void Human_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (enemyTimer.IsEnabled)
@@ -123,7 +114,6 @@ namespace Save_the_Humans
                 human.IsHitTestVisible = false;
             }
         }
-
         private void Target_MouseEnter(object sender, MouseEventArgs e)
         {
             if (targetTimer.IsEnabled && humanCaptured)
@@ -138,7 +128,6 @@ namespace Save_the_Humans
 
             }
         }
-
         private void playArea_MouseMove(object sender, MouseEventArgs e)
         {
             if (humanCaptured)
@@ -158,13 +147,10 @@ namespace Save_the_Humans
                 }
             }
         }
-
         private void playArea_MouseLeave(object sender, MouseEventArgs e)
         {
             if (humanCaptured)
                 EndTheGame();
         }
-
-
     }
 }
