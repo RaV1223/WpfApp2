@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
-namespace Save_the_Humans
+namespace kosmici
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
